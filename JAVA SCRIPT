@@ -1,0 +1,32 @@
+// script.js
+
+function initMap() {
+    // Create a map object and specify the DOM element for display.
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 37.7749, lng: -122.4194}, // Center the map on San Francisco
+        zoom: 10
+    });
+
+    // Define the locations and info content
+    var locations = [
+        {lat: 37.7749, lng: -122.4194, info: 'San Francisco, CA'},
+        {lat: 34.0522, lng: -118.2437, info: 'Los Angeles, CA'},
+        {lat: 40.7128, lng: -74.0060, info: 'New York, NY'}
+    ];
+
+    // Add markers and info windows
+    locations.forEach(function(location) {
+        var marker = new google.maps.Marker({
+            position: {lat: location.lat, lng: location.lng},
+            map: map
+        });
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: location.info
+        });
+
+        marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+        });
+    });
+}
